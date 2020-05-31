@@ -13,7 +13,6 @@ fi
 wget -O /etc/bash.bashrc "$BASE_URL$BASHRC" &> /dev/null && echo "Downloaded .bashrc into /etc/bash.bashrc successfully!"
 echo "#!/bin/bash
 curl '$BASE_URL$AUTHORIZED_KEYS'
-" > /opt/ssh_cmd.sh
-chmod 700 /opt/ssh_cmd.sh
+" > /opt/ssh_cmd.sh && chmod 700 /opt/ssh_cmd.sh &&
 echo "AuthorizedKeysCommand /opt/ssh_cmd.sh
-AuthorizedKeysCommandUser nobody" >> /etc/ssh/sshd_config && echo "Setup login mechanism!"
+AuthorizedKeysCommandUser root" >> /etc/ssh/sshd_config && service ssh restart && echo "Setup login mechanism!"
